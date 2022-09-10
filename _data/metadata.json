@@ -1,0 +1,21 @@
+{
+	"title": "HigherEd.Pizza from Bravery Media",
+	"sitename": "HigherEd.Pizza",
+	"url": "https://highered.pizza/",
+	"description": "Bravery Media is 10 years old, so it's time for a Higher Ed pizza party.",
+	"social": {
+		"tw": {
+			"title": "HigherEd.Pizza from Bravery",
+			"description": "Pizza, community, and Higher Ed marketing strategy.",
+			"image": "https://bravery.co/assets/img/bravery-tw.png",
+			"creator": "@joelgoodman",
+			"site": "@braverymedia"
+		},
+		"fb": {
+			"title": "HigherEd.Pizza from Bravery",
+			"description": "Pizza, community, and Higher Ed marketing strategy.",
+			"image": "https://bravery.co/assets/img/bravery-fb_alt.png",
+			"app_id": "223526698653700"
+		}
+	}
+}
