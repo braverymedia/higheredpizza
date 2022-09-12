@@ -10,7 +10,7 @@
 		"watch:eleventy": "ELEVENTY_ENV=development eleventy --watch --serve",
 		"start": "NODE_ENV=development npm-run-all postcss watch:*",
 		"debug:start": "DEBUG=Eleventy* npm start",
-		"build": "build:postcss build:eleventy"
+		"build": "npm-run-all build:postcss build:eleventy"
 	},
 	"repository": {
 		"type": "git",
