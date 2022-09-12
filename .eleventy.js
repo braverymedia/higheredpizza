@@ -1,16 +1,35 @@
+const { DateTime } = require("luxon");
 const { minify } = require("terser");
 const { PurgeCSS } = require("purgecss");
 const CleanCSS = require("clean-css");
 const htmlmin = require("html-minifier");
+const md = require("markdown-it");
+const { EleventyRenderPlugin } = require("@11ty/eleventy");
 
-module.exports = function (hepConfig) {
+module.exports = function (eleventyConfig) {
+	eleventyConfig.addPlugin(EleventyRenderPlugin);
+
+	// only content in the `src/events/` directory
+	eleventyConfig.addCollection("events", function (collection) {
+		return collection.getAllSorted().filter(function (item) {
+			return item.inputPath.match(/^\.\/events\//) !== null;
+		});
+	});
+	eleventyConfig.addFilter("shortDate", (dateObj) => {
+		return DateTime.fromJSDate(dateObj, { zone: 'utc'} ).toFormat("LLL dd");
+	});
+
+	eleventyConfig.addFilter("isPastDate", (dateObj) => {
+		return DateTime.fromJSDate(dateObj) < new Date();
+	});
+
 	// Minify CSS
-	hepConfig.addFilter("cssmin", function (code) {
+	eleventyConfig.addFilter("cssmin", function (code) {
 		return new CleanCSS({}).minify(code).styles;
 	});
 
 	// Minify JS
-	hepConfig.addNunjucksAsyncFilter(
+	eleventyConfig.addNunjucksAsyncFilter(
 		"jsmin",
 		async function (code, callback) {
 			try {
@@ -30,7 +49,7 @@ module.exports = function (hepConfig) {
 	 *
 	 * @see {@link https://github.com/FullHuman/purgecss}
 	 */
-	hepConfig.addTransform("purge-and-inline-css", async function (content) {
+	eleventyConfig.addTransform("purge-and-inline-css", async function (content) {
 		if (
 			process.env.ELEVENTY_ENV !== "production" ||
 			!this.outputPath.endsWith(".html")
@@ -50,31 +69,32 @@ module.exports = function (hepConfig) {
 		);
 	});
 
-	hepConfig.addTransform("htmlmin", function (content) {
-		if (this.outputPath.endsWith(".html")) {
-			let minified = htmlmin.minify(content, {
-				useShortDoctype: true,
-				removeComments: true,
-				collapseWhitespace: true,
-			});
-			return minified;
-		}
+	/* Markdown Plugins */
+	let mdOpts = {
+		html: true,
+		breaks: true,
+		linkify: true,
+	};
 
-		return content;
+	eleventyConfig.setLibrary("md", md(mdOpts));
+	eleventyConfig.addFilter("markdown", (content) => {
+		return md.render(content);
 	});
-    hepConfig.addPassthroughCopy({ "src/_includes": "_includes" });
-    return {
-        templateFormats: ["md", "njk", "html"],
-        pathPrefix: "/",
-        markdownTemplateEngine: "liquid",
-        htmlTemplateEngine: "njk",
-        dataTemplateEngine: "njk",
-        passthroughFileCopy: true,
-        dir: {
-            input: "src",
-            includes: "_includes",
-            data: "_data",
-            output: "_site",
-        },
-    };
-}
+
+	eleventyConfig.addPassthroughCopy({ "_includes/assets": "assets" });
+
+	return {
+		templateFormats: ["md", "njk", "html"],
+		pathPrefix: "/",
+		markdownTemplateEngine: "liquid",
+		htmlTemplateEngine: "njk",
+		dataTemplateEngine: "njk",
+		passthroughFileCopy: true,
+		dir: {
+			input: ".",
+			includes: "_includes",
+			data: "_data",
+			output: "_site",
+		},
+	};
+};

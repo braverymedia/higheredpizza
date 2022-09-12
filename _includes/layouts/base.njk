@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  {% include "components/head.njk" %}
+  <body>
+    <header class="page-title">
+      <h1 class="sr">HigherEd.Pizza</h1>
+      <figure class="logo">
+        <img src="assets/svg/hep-logo.svg" class="hep-logo-vector" alt="Vector illustration of a slice of pizza with melting cheese. Underneath is the title, higher ed dot pizza." width="583" height="563" />
+      </figure>
+      <p>Bravery is <br><strong>10 years old.</strong></p>
+      <div class="color--accent small triangle" role="img" aria-label="Background image. Small triangle.">
+          {% include 'assets/svg/triangle.njk' %}
+      </div>
+      <figure class="toppings" role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings.">
+        <div class="color--primary large olive">
+            {% include 'assets/svg/olive.njk' %}
+        </div>
+        <div class="color--accent small pepp">
+            {% include 'assets/svg/pepp.njk' %}
+        </div>
+        <div class="color--primary small squiggle">
+            {% include 'assets/svg/squiggle.njk' %}
+        </div>
+      </figure>
+    </header>
+    <main>
+      <header>
+        <h2>lets party</h2>
+        <div class="double stack">
+          <span class="color--accent">
+              {% include 'assets/svg/triple-stack.njk' %}
+          </span>
+          <span class="color--primary">
+              {% include 'assets/svg/triple-stack.njk' %}
+          </span>
+        </div>
+      </header>
+      <article class="intro">
+        <p>Join other higher ed friends<br> and colleagues for great pizza, beverages, and socializing.</p>
+        <p>Hosted by your pals at <a href="https://bravery.co/?utm_source=pizza">Bravery Media</a>.</p>
+        <figure class="toppings" role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings.">
+          <div class="color--primary medium tall-tri">
+              {% include 'assets/svg/tall-triangle.njk' %}
+          </div>
+          <div class="color--accent pepp">
+              {% include 'assets/svg/pepp.njk' %}
+          </div>
+        </figure>
+      </article>
+      <figure class="toppings" role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings.">
+        <div class="color--primary large shaker">
+            {% include 'assets/svg/shaker.njk' %}
+        </div>
+        <div class="color--primary olive">
+            {% include 'assets/svg/olive.njk' %}
+        </div>
+        <div class="color--accent small stack">
+            {% include 'assets/svg/triple-stack.njk' %}
+        </div>
+        <div class="color--primary squiggle">
+            {% include 'assets/svg/squiggle.njk' %}
+        </div>
+        <div class="color--accent onion">
+            {% include 'assets/svg/onion.njk' %}
+        </div>
+        <div class="color--primary pepp">
+            {% include 'assets/svg/pepp.njk' %}
+        </div>
+      </figure>
+      <a href="https://bravery.co/?utm_source=pizza" title="Visit Bravery Media" class="bravery-logo">
+        {% include "assets/svg/bravery.njk" %}
+      </a>
+      {% set events = collections.events %}
+      <section class="events">
+      {% for event in events %}
+        {% set eventDone = event.data.date | isPastDate %}
+        {% if event.data.rsvp_url != false and eventDone != true %}
+          <a href="{{ event.data.rsvp_url }}" title="RSVP to HigherEd.Pizza in {{ event.data.loc_short }}" class="hep-event" itemscope itemtype="https://schema.org/Event">
+            {% include "components/event-card.njk" %}
+          </a>
+        {% else %}
+          <div class="hep-event" itemscope itemtype="https://schema.org/Event">
+            {% include "components/event-card.njk" %}
+          </div>
+        {% endif %}
+      {% endfor %}
+        <figure role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings." class="toppings">
+          <div class="double pepp">
+            <span class="color--primary">
+                {% include 'assets/svg/pepp.njk' %}
+            </span>
+            <span class="color--accent">
+                {% include 'assets/svg/pepp.njk' %}
+            </span>
+        </div>
+        <div class="color--primary tall-tri">
+            {% include 'assets/svg/tall-triangle.njk' %}
+        </div>
+        <div class="color--primary bottom squiggle">
+            {% include 'assets/svg/squiggle.njk' %}
+        </div>
+        <div class="color--primary triangle">
+            {% include 'assets/svg/triangle.njk' %}
+        </div>
+        <div class="color--primary onion">
+            {% include 'assets/svg/onion.njk' %}
+        </div>
+        <div class="color--accent olive">
+            {% include 'assets/svg/olive.njk' %}
+        </div>
+        </figure>
+      </section>
+    </main>
+  </body>
+</html>

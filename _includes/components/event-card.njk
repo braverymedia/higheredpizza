@@ -1,0 +1,13 @@
+<article{% if eventDone == true %} class="event-passed"{% endif %}>
+    <h3 itemprop="name">{{ event.data.title }}</h3>
+    <p><span itemprop="startDate" content="{{ event.data.date }}">{{ event.data.date | shortDate }}</span> &bull; <span>{{ event.data.time }}</span> &bull; <span>{{ event.data.loc_short }}</span></p>
+    <footer>
+        {% if eventDone == true %}
+            (That was fun)
+        {% elif event.data.rsvp_url == false %}
+            (Soon)
+        {% else %}
+            RSVP
+        {% endif %}
+    </footer>
+</article>
