@@ -1,0 +1,9 @@
+[build]
+publish = "_site"
+command = "npm run build"
+
+[[redirects]]
+from = "https://highered.pizza/*"
+to = "https://littlerockpizza.eventbrite.com/"
+status = 302
+force = true

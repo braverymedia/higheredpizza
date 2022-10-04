@@ -67,9 +67,6 @@
             {% include 'assets/svg/pepp.njk' %}
         </div>
       </figure>
-      <a href="https://bravery.co/?utm_source=pizza" title="Visit Bravery Media" class="bravery-logo">
-        {% include "assets/svg/bravery.njk" %}
-      </a>
       {% set events = collections.events %}
       <section class="events">
       {% for event in events %}
@@ -84,30 +81,33 @@
           </div>
         {% endif %}
       {% endfor %}
-        <figure role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings." class="toppings">
+      <a href="https://bravery.co/?utm_source=pizza" title="Visit Bravery Media" class="bravery-logo">
+        {% include "assets/svg/bravery.njk" %}
+      </a>
+      <figure role="img" aria-label="Background image. A mix of 1990s abstract shapes that look like pizza toppings." class="toppings">
           <div class="double pepp">
-            <span class="color--primary">
-                {% include 'assets/svg/pepp.njk' %}
-            </span>
-            <span class="color--accent">
-                {% include 'assets/svg/pepp.njk' %}
-            </span>
-        </div>
-        <div class="color--primary tall-tri">
-            {% include 'assets/svg/tall-triangle.njk' %}
-        </div>
-        <div class="color--primary bottom squiggle">
-            {% include 'assets/svg/squiggle.njk' %}
-        </div>
-        <div class="color--primary triangle">
-            {% include 'assets/svg/triangle.njk' %}
-        </div>
-        <div class="color--primary onion">
-            {% include 'assets/svg/onion.njk' %}
-        </div>
-        <div class="color--accent olive">
-            {% include 'assets/svg/olive.njk' %}
-        </div>
+              <span class="color--primary">
+                  {% include 'assets/svg/pepp.njk' %}
+              </span>
+              <span class="color--accent">
+                  {% include 'assets/svg/pepp.njk' %}
+              </span>
+          </div>
+          <div class="color--primary tall-tri">
+              {% include 'assets/svg/tall-triangle.njk' %}
+          </div>
+          <div class="color--primary bottom squiggle">
+              {% include 'assets/svg/squiggle.njk' %}
+          </div>
+          <div class="color--primary triangle">
+              {% include 'assets/svg/triangle.njk' %}
+          </div>
+          <div class="color--primary onion">
+              {% include 'assets/svg/onion.njk' %}
+          </div>
+          <div class="color--accent olive">
+              {% include 'assets/svg/olive.njk' %}
+          </div>
         </figure>
       </section>
     </main>
